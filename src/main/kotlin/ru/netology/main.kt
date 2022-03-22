@@ -38,7 +38,7 @@ fun limitCheck(card: String, pastExpenses: Int, transfer: Int): Boolean {
     }
 }
 
-fun fee(card: String = "VK Pay", pastExpenses: Int = 0, transfer: Int): String {
+fun fee(card: String = "VK Pay", pastExpenses: Int = 0, transfer: Int): Double {
     val isAvailable = limitCheck(card, pastExpenses, transfer)
     var comission = 0.0
     if (isAvailable) {
@@ -55,17 +55,35 @@ fun fee(card: String = "VK Pay", pastExpenses: Int = 0, transfer: Int): String {
                 comission = 0.0
             }
         }
-        return "Комиссия при переводе $transfer руб. (с учетом прошлых переводов $pastExpenses руб.) через $card составит: ${
-            doubleFormat(
-                comission
-            )
-        }"
-    } else return "Перевод не может быть осуществлен"
-
+        return comission
+    } else return 0.0
 }
 
 fun main() {
-    println(fee(card = "Mastercard", pastExpenses = 80_000, transfer = 10_100))
-    println(fee(card = "Visa", pastExpenses = 10_000, transfer = 10_100))
-    println(fee(card = "VK Pay", pastExpenses = 100_000_000, transfer = 10_100))
+    val pastExpenses = 10_000
+    val transfer = 10_100
+
+    println(
+        "Комиссия при переводе $transfer руб. (с учетом прошлых переводов $pastExpenses руб.) через \"Mastercard\" составит: ${
+            doubleFormat(
+                fee(card = "Mastercard", pastExpenses = pastExpenses, transfer = transfer)
+            )
+        }"
+    )
+
+    println(
+        "Комиссия при переводе $transfer руб. (с учетом прошлых переводов $pastExpenses руб.) через \"Visa\" составит: ${
+            doubleFormat(
+                fee(card = "Visa", pastExpenses = pastExpenses, transfer = transfer)
+            )
+        }"
+    )
+
+    println(
+        "Комиссия при переводе $transfer руб. (с учетом прошлых переводов $pastExpenses руб.) через \"VK Pay\" составит: ${
+            doubleFormat(
+                fee(card = "VK Pay", pastExpenses = pastExpenses, transfer = transfer)
+            )
+        }"
+    )
 }
