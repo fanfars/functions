@@ -12,8 +12,9 @@ const val visaMinCommission = 35
 
 fun doubleFormat(valueDouble: Double): String {
     val rub = valueDouble.toInt()
-    val kopeyki = (valueDouble % rub * 100).toInt()
-    return if (kopeyki == 0) "$rub руб." else "$rub руб. $kopeyki коп."
+    if (rub == 0) return "$rub руб."
+    val kop = ((valueDouble * 100.0).toInt()) % (rub * 100)
+    return if (kop == 0) "$rub руб." else "$rub руб. $kop коп."
 }
 
 fun limitCheck(card: String, pastExpenses: Int, transfer: Int): Boolean {
