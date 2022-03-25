@@ -38,7 +38,7 @@ fun limitCheck(card: String, pastExpenses: Int, transfer: Int): Boolean {
         else -> return true
     }
 }
-
+@JvmOverloads
 fun fee(card: String = "VK Pay", pastExpenses: Int = 0, transfer: Int): Double {
     val isAvailable = limitCheck(card, pastExpenses, transfer)
     var comission = 0.0
