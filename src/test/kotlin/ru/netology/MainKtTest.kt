@@ -9,7 +9,7 @@ class MainKtTest {
     @Test
     fun doubleFormatTypeRubOnly() {
         val valueDouble = 10.0
-        val expectedFormat = "10 руб."
+        val expectedFormat = "11 руб."
 
         val actualFormat = doubleFormat(valueDouble)
 
